@@ -1,0 +1,20 @@
+export default class Character {
+  constructor({ hp, dmg, mana }) {
+    this.hp = hp;
+    this.dmg = dmg;
+    this.mana = mana;
+    this.status = 'playing';
+  }
+
+  takeDamage(damage) {
+    this.hp -= damage;
+
+    if (this.hp <= 0) this.status = 'loser';
+  }
+
+  dealDamage(victim) {
+    victim.takeDamage(this.dmg);
+
+    if (victim.status === 'loser') this.mana += 20;
+  }
+}
