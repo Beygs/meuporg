@@ -1,5 +1,7 @@
-import Assassin from "./characters/assassin.js";
-import Fighter from "./characters/fighter.js";
+import Game from "./game.js";
 
-const denis = new Assassin();
-const rene = new Fighter();
+const game = new Game();
+
+while (game.turnLeft > 0) {
+  game.newTurn();
+}

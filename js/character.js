@@ -1,5 +1,6 @@
 export default class Character {
-  constructor({ hp, dmg, mana }) {
+  constructor({ name, hp, dmg, mana }) {
+    this.name = name;
     this.hp = hp;
     this.dmg = dmg;
     this.mana = mana;
