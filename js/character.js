@@ -9,12 +9,15 @@ export default class Character {
 
   takeDamage(damage) {
     this.hp -= damage;
+    console.group(`${this.name} perd ${damage} points de vie.`);
+    console.log(`Il reste ${this.hp} points de vie à ${this.name}.`);
+    console.groupEnd();
 
     if (this.hp <= 0) this.status = 'loser';
   }
 
-  dealDamage(victim) {
-    victim.takeDamage(this.dmg);
+  dealDamage({ victim, dmg = this.dmg }) {
+    victim.takeDamage(dmg);
 
     if (victim.status === 'loser') this.mana += 20;
   }

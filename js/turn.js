@@ -6,7 +6,7 @@ export default class Turn {
   }
 
   startTurn() {
-    console.log(`C'est parti pour le tour ${this.turnNumber} !`);
+    console.group(`C'est parti pour le tour ${this.turnNumber} !`);
     this.shuffleCharacters().forEach(character => this.turnOf(character));
   }
 

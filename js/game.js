@@ -15,10 +15,11 @@ export default class Game {
       new Monk({ name: 'Moana' }),
       new Berzerker({ name: 'Draven' }),
       new Assassin({ name: 'Carl' })
-    ]
+    ];
   }
 
   newTurn() {
+    console.groupEnd();
     const turn = new Turn({ turnNumber: this.totalTurns - this.turnLeft + 1, characters: this.characters });
     this.turnLeft -= 1;
   }
