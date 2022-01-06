@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kings&family=MedievalSharp&display=swap');
+
 *,
 *::before,
 *::after {
@@ -122,17 +123,17 @@ button {
 .hover-text {
   position: absolute;
   font-family: serif;
-  bottom: -100%;
+  top: 105%;
   left: 0;
   right: 0;
   text-align: center;
   font-size: .8em;
   color: white;
-  background-color: hsl(194, 28%, 42%);
-  line-height: 225%;
+  background-color: #984447;
   border-radius: 2rem;
   opacity: 0;
   cursor: default;
+  padding: .8em;
   transition: all .3s ease;
 }
 
@@ -194,7 +195,15 @@ img.hurt {
 }
 
 .hp.hurt span {
-  animation: blinkHurt .3s ease 6 alternate;
+  animation: blinkNegative .3s ease 6 alternate;
+}
+
+.positive span {
+  animation: blinkPositive .3s ease 6 alternate;
+}
+
+.negative span {
+  animation: blinkNegative .3s ease 6 alternate;
 }
 
 @keyframes tilt {
@@ -227,12 +236,22 @@ img.hurt {
   }
 }
 
-@keyframes blinkHurt {
+@keyframes blinkNegative {
   0% {
     color: black;
   }
 
   100% {
     color: red;
+  }
+}
+
+@keyframes blinkPositive {
+  0% {
+    color: black;
+  }
+
+  100% {
+    color: hsl(214, 37%, 44%);
   }
 }

@@ -5,7 +5,7 @@ import Monk from "./characters/monk.js";
 import Paladin from "./characters/paladin.js";
 import Hud from "./hud.js";
 import Turn from "./turn.js";
-import { display } from "./utils.js";
+import { display, speech } from "./utils.js";
 
 const text = document.getElementById("text");
 const btns = document.getElementById("btns");
@@ -22,6 +22,7 @@ export default class Game {
       new Assassin({ name: "Carl" }),
     ];
     this.hud = new Hud(this.characters);
+
     display({
       text: "Bienvenue dans le MEUPORG ",
       options: [{ text: "Continuer", action: this.newTurn.bind(this) }],
@@ -48,6 +49,12 @@ export default class Game {
   }
 
   endGame() {
+    speech([
+      "Youpiiiiii j'ai gagné !",
+      "C'était trop facile",
+      "Moi j'adore la bagarre",
+    ]);
+
     display({
       text: `Fin du jeu ! Le ou les gagnants sont : ${this.characters
         .filter((c) => c.status === "playing")

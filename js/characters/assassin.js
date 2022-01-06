@@ -1,5 +1,5 @@
 import Character from "../character.js";
-import { display } from "../utils.js";
+import { display, speech } from "../utils.js";
 
 export default class Assassin extends Character {
   constructor({ name, hp = 6, dmg = 6, mana = 20 } = {}) {
@@ -9,11 +9,13 @@ export default class Assassin extends Character {
       name: "Shadow Hit",
       action: this.specialAttackAction,
       cost: 20,
+      hover: `Coûte 20 mana\nPermets d'esquiver toutes les attaques jusqu'à la fin du tour\nInflige 7 dégats`,
     };
   }
 
   specialAttackAction() {
-    this.mana -= this.specialAttack.cost;
+    super.specialAttackAction();
+
     this.special = true;
 
     display({
@@ -30,12 +32,16 @@ export default class Assassin extends Character {
 
   takeDamage(damage) {
     if (this.special) {
+      speech(['Nananananèreuh']);
+
       display({
         text: `Grâce à son attaque spéciale Shadow hit, ${this.name} esquive l'attaque. Il ne subit aucun points de dégats`,
-        options: {
-          text: "Continuer",
-          action: () => this.turn.nextTurn(),
-        },
+        options: [
+          {
+            text: "Continuer",
+            action: () => this.turn.nextTurn(),
+          },
+        ],
       });
       return;
     }

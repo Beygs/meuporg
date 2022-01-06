@@ -9,11 +9,13 @@ export default class Fighter extends Character {
       name: "Dark Vision",
       action: this.specialAttackAction,
       cost: 20,
+      hover: `Coûte 20 mana\nDégats infligés jusqu'à la fin du tour réduits de 2\nInflige 5 dégats`
     };
   }
 
   specialAttackAction() {
-    this.mana -= this.specialAttack.cost;
+    super.specialAttackAction();
+
     this.special = true;
 
     display({

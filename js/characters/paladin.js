@@ -8,12 +8,22 @@ export default class Paladin extends Character {
       name: "Healing Light",
       action: this.specialAttackAction,
       cost: 40,
+      hover: `Coûte 40 mana\nPermet de récupérer 5 points de vie\nInflige 4 dégats`
     };
   }
 
   specialAttackAction() {
-    this.mana -= this.specialAttack.cost;
     this.hp += 5;
+
+    super.specialAttackAction();
+
+    const hp = document.querySelector(`.c${this.id} .hp`);
+
+    hp.classList.add("positive");
+
+    setTimeout(() => {
+      hp.classList.remove("positive");
+    }, 2000);
 
     display({
       text: `${this.name} lance son attaque spéciale : Healing Light, qui lui permet de récupérer 5 hp.\nIl a désormais ${this.hp} points de vie.`,

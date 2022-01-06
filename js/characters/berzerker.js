@@ -7,12 +7,23 @@ export default class Berzerker extends Character {
     this.specialAttack = {
       name: "Rage",
       action: this.specialAttackAction,
-      cost: 0
+      cost: 0,
+      hover: `Coûte 0 mana\nPermet de gagner un point de dégat`
     };
   }
 
   specialAttackAction() {
     this.dmg++;
+
+    super.specialAttackAction();
+
+    const dmg = document.querySelector(`.c${this.id} .dmg`);
+
+    dmg.classList.add("positive");
+
+    setTimeout(() => {
+      dmg.classList.remove("positive");
+    }, 2000);
 
     display({
       text: `${this.name} lance son attaque spéciale : Rage, qui lui permet de gagner un poitn d'attaque.\nIl a désormais ${this.dmg} points d'attaque.`,

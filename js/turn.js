@@ -1,5 +1,5 @@
 import Game from "./game.js";
-import { display } from "./utils.js";
+import { display, speech } from "./utils.js";
 
 export default class Turn {
   constructor({ turnNumber, characters, game }) {
@@ -52,18 +52,30 @@ export default class Turn {
     const characterImg = document.querySelector(`.c${character.id} img`);
     characterImg.classList.add("turn");
 
+    speech([
+      "ça va chier",
+      "Attention à vous",
+      "Allez lezgo",
+      "Préparez-vous bande de nullos",
+      "Je vais tous vous zigouiller",
+      "A l'attaque !",
+      "C'est parti mon kiki",
+    ]);
+
     display({
       text: `C'est au tour de ${character.name} de jouer !`,
       options: [
         {
           text: "Attaquer",
           action: character.attack.bind(character),
+          hover: `Inflige ${character.dmg} dégats`
         },
         {
           text: character.specialAttack.name,
           action: character.specialAttack.action.bind(character),
           deactivated: character.activateSpecial(),
-          cost: character.specialAttack.cost,
+          hover: character.specialAttack.hover,
+          deactivatedHover: 'Pas assez de mana',
         },
       ],
     });
