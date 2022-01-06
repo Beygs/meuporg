@@ -7,6 +7,7 @@ export default class Berzerker extends Character {
     this.specialAttack = {
       name: "Rage",
       action: this.specialAttackAction,
+      cost: 0
     };
   }
 

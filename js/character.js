@@ -14,9 +14,38 @@ export default class Character {
   takeDamage(damage) {
     this.hp -= damage;
 
+    const sounds = [
+      "Aïe",
+      "Aouch",
+      "Non mais dis-donc",
+      "ça fait mal",
+      "Ouille",
+      "Je vais me plaindre à Féfé",
+    ];
+
+    const speech = new SpeechSynthesisUtterance(
+      sounds[Math.floor(Math.random() * sounds.length)]
+    );
+
+    speech.lang = "fr-FR";
+    speech.value = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+
+    window.speechSynthesis.speak(speech);
+
     if (this.hp <= 0) {
       this.status = "loser";
       this.hp = 0;
+      const deadSounds = [
+        "Mince alors je suis mort",
+        "RIP petit ange parti trop vite",
+        "J'ai envie de me suicider parce que c'est cool la mort",
+      ];
+
+      speech.text = deadSounds[Math.floor(Math.random() * deadSounds.length)];
+
+      window.speechSynthesis.speak(speech);
     }
 
     const text =
@@ -45,12 +74,12 @@ export default class Character {
     const victimImg = document.querySelector(`.c${victim.id} img`);
     const victimHp = document.querySelector(`.c${victim.id} .hp`);
 
-    victimImg.classList.add('hurt');
-    victimHp.classList.add('hurt');
+    victimImg.classList.add("hurt");
+    victimHp.classList.add("hurt");
 
     setTimeout(() => {
-      victimImg.classList.remove('hurt');
-      victimHp.classList.remove('hurt');
+      victimImg.classList.remove("hurt");
+      victimHp.classList.remove("hurt");
     }, 2000);
   }
 

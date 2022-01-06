@@ -50,7 +50,7 @@ export default class Turn {
 
   turnOf(character) {
     const characterImg = document.querySelector(`.c${character.id} img`);
-    characterImg.classList.add('turn');
+    characterImg.classList.add("turn");
 
     display({
       text: `C'est au tour de ${character.name} de jouer !`,
@@ -63,6 +63,7 @@ export default class Turn {
           text: character.specialAttack.name,
           action: character.specialAttack.action.bind(character),
           deactivated: character.activateSpecial(),
+          cost: character.specialAttack.cost,
         },
       ],
     });

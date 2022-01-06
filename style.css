@@ -109,6 +109,7 @@ body {
 }
 
 button {
+  position: relative;
   padding: .4em .8em;
   border: none;
   border-radius: 2rem;
@@ -116,6 +117,27 @@ button {
   background-color: hsl(34, 78%, 80%);
   margin: .1em;
   min-width: 12rem;
+}
+
+.hover-text {
+  position: absolute;
+  font-family: serif;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: .8em;
+  color: white;
+  background-color: hsl(194, 28%, 42%);
+  line-height: 225%;
+  border-radius: 2rem;
+  opacity: 0;
+  cursor: default;
+  transition: all .3s ease;
+}
+
+button:hover .hover-text {
+  opacity: .5;
 }
 
 .deactivated {
