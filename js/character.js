@@ -16,7 +16,10 @@ export default class Character {
     console.log(`Il reste ${this.hp} points de vie à ${this.name}.`);
     console.groupEnd();
 
-    if (this.hp <= 0) this.status = "loser";
+    if (this.hp <= 0) {
+      this.status = "loser"
+      this.hp = 0;
+    };
   }
 
   dealDamage({ victim, dmg = this.dmg } = {}) {
@@ -35,6 +38,7 @@ export default class Character {
         options.push({
           text: character.name,
           action: () => this.dealDamage({ victim: character, dmg }),
+          deactivated: character.status !== 'playing'
         });
       }
     });

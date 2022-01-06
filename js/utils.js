@@ -9,13 +9,15 @@ export const display = ({ text, options }) => {
   }
 
   options.forEach(option => {
+    const btn = document.createElement('button');
+    btn.innerText = option.text;
+    btn.addEventListener('click', () => option.action());
     if (showOption(option)) {
-      const btn = document.createElement('button');
-      btn.innerText = option.text;
-      btn.addEventListener('click', () => option.action());
-      btnsEl.appendChild(btn);
+      btn.classList.add('deactivated');
+      btn.disabled = true;
     }
+    btnsEl.appendChild(btn);
   });
 }
 
-const showOption = option => option.display === undefined || option.display;
+const showOption = option => !option.deactivated === undefined || option.deactivated;

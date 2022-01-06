@@ -1,5 +1,4 @@
 import Character from "../character.js";
-import Game from "../game.js";
 
 export default class Fighter extends Character {
   constructor({ name, hp = 12, dmg = 4, mana = 40, game } = {}) {

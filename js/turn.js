@@ -26,10 +26,18 @@ export default class Turn {
   }
 
   nextTurn() {
+    this.game.hud.showStats();
+
     if (this.turnOfId === this.characters.length - 1) return this.game.newTurn();
 
     this.turnOfId += 1;
-    this.turnOf(this.characters[this.turnOfId]);
+    const character = this.characters[this.turnOfId];
+
+    if (character.status === 'playing') {
+      this.turnOf(character);
+    } else {
+      this.nextTurn();
+    }
   }
 
   shuffleCharacters() {

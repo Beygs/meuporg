@@ -112,3 +112,23 @@ button {
   margin: .1em;
   min-width: 12rem;
 }
+
+.deactivated {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.characters-status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+}
+
+.characters-status div {
+  margin: 1rem;
+}
+
+.dead {
+  color: red;
+}
