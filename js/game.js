@@ -1,6 +1,7 @@
 import Assassin from "./characters/assassin.js";
 import Berzerker from "./characters/berzerker.js";
 import Fighter from "./characters/fighter.js";
+import GrosseMerde from "./characters/grosse_merde.js";
 import Monk from "./characters/monk.js";
 import Paladin from "./characters/paladin.js";
 import Wizard from "./characters/wizard.js";
@@ -34,6 +35,7 @@ export default class Game {
       name => new Berzerker({ name }),
       name => new Assassin({ name }),
       name => new Wizard({ name }),
+      name => new GrosseMerde({ name }),
     ];
 
     const names = [
