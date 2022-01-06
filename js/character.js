@@ -23,6 +23,8 @@ export default class Character {
     victim.takeDamage(dmg);
 
     if (victim.status === "loser") this.mana += 20;
+
+    this.turn.nextTurn();
   }
 
   attack({ dmg = this.dmg } = {}) {

@@ -29,10 +29,10 @@ export default class Game {
   }
 
   newTurn() {
-    console.groupEnd();
     const turn = new Turn({
       turnNumber: this.totalTurns - this.turnLeft + 1,
       characters: this.characters,
+      game: this
     });
     this.turnLeft -= 1;
   }

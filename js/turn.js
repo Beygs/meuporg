@@ -1,9 +1,10 @@
 import { display } from "./utils.js";
 
 export default class Turn {
-  constructor({ turnNumber, characters }) {
+  constructor({ turnNumber, characters, game }) {
     this.turnNumber = turnNumber;
     this.characters = characters;
+    this.game = game;
     this.turnOfId = 0;
     characters.forEach(c => {
       if (c.special) c.special = false;
@@ -21,12 +22,14 @@ export default class Turn {
   }
 
   startTurn() {
-    this.turnOf(this.shuffleCharacters()[this.turnOfId]); //.forEach((character) => this.turnOf(character));
+    this.turnOf(this.shuffleCharacters()[this.turnOfId]);
   }
 
   nextTurn() {
+    if (this.turnOfId === this.characters.length - 1) return this.game.newTurn();
+
     this.turnOfId += 1;
-    this.turnOf(this.turnOfId);
+    this.turnOf(this.characters[this.turnOfId]);
   }
 
   shuffleCharacters() {
