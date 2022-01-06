@@ -7,7 +7,7 @@ export default class Turn {
     this.characters = characters;
     this.game = game;
     this.turnOfId = 0;
-    characters.forEach(c => {
+    characters.forEach((c) => {
       if (c.special) c.special = false;
       c.turn = this;
     });
@@ -37,7 +37,7 @@ export default class Turn {
     const character = this.characters[this.turnOfId];
     this.turnOfId += 1;
 
-    if (character.status === 'playing') {
+    if (character.status === "playing") {
       this.turnOf(character);
     } else {
       this.nextTurn();
@@ -59,7 +59,7 @@ export default class Turn {
         {
           text: character.specialAttack.name,
           action: character.specialAttack.action.bind(character),
-          deactivated: character.activateSpecial()
+          deactivated: character.activateSpecial(),
         },
       ],
     });
@@ -80,13 +80,18 @@ export default class Turn {
 
   endGame() {
     display({
-      text: `Fin du jeu ! Le ou les gagnants sont : ${this.characters.filter(c => c.status === 'playing').map(c => c.name).join(', ')} !`,
-      options: [{
-        options: {
-          text: 'Rejouer',
-          action: () => new Game({ turnLeft: 10 })
-        }
-      }]
-    })
+      text: `Fin du jeu ! Le ou les gagnants sont : ${this.characters
+        .filter((c) => c.status === "playing")
+        .map((c) => c.name)
+        .join(", ")} !`,
+      options: [
+        {
+          options: {
+            text: "Rejouer",
+            action: () => new Game({ turnLeft: 10 }),
+          },
+        },
+      ],
+    });
   }
 }

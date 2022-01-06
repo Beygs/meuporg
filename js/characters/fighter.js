@@ -1,24 +1,30 @@
 import Character from "../character.js";
+import { display } from "../utils.js";
 
 export default class Fighter extends Character {
   constructor({ name, hp = 12, dmg = 4, mana = 40, game } = {}) {
     super({ name, hp, dmg, mana, game });
     this.special = false;
     this.specialAttack = {
-      name: 'Dark Vision',
+      name: "Dark Vision",
       action: this.specialAttackAction,
-      cost: 20
-    }
+      cost: 20,
+    };
   }
 
   specialAttackAction() {
-    console.group(`${this.name} lance son attaque spéciale : %cDark Vision`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
-
     this.mana -= this.specialAttack.cost;
-    this.attack();
     this.special = true;
 
-    console.groupEnd();
+    display({
+      text: `${this.name} lance son attaque spéciale : Dark Vision\nLes attaques dirigées contre lui lui feront moins mal jusqu'à la fin du tour.`,
+      options: [
+        {
+          text: "Continuer",
+          action: () => this.attack({ dmg: 5 }),
+        },
+      ],
+    });
   }
 
   takeDamage(damage) {

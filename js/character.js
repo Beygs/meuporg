@@ -12,22 +12,32 @@ export default class Character {
 
   takeDamage(damage) {
     this.hp -= damage;
-    console.group(`${this.name} perd ${damage} points de vie.`);
-    console.log(`Il reste ${this.hp} points de vie à ${this.name}.`);
-    console.groupEnd();
 
     if (this.hp <= 0) {
-      this.status = "loser"
+      this.status = "loser";
       this.hp = 0;
-    };
+    }
+
+    const text =
+      this.hp > 0
+        ? `Il lui reste ${this.hp} points de vie`
+        : `${this.name} est mort 💀💀💀💀`;
+
+    display({
+      text: `${this.name} perd ${damage} points de vie.\n` + text,
+      options: [
+        {
+          text: "Continuer",
+          action: () => this.turn.nextTurn(),
+        },
+      ],
+    });
   }
 
   dealDamage({ victim, dmg = this.dmg } = {}) {
     victim.takeDamage(dmg);
 
     if (victim.status === "loser") this.mana += 20;
-
-    this.turn.nextTurn();
   }
 
   attack({ dmg = this.dmg } = {}) {
@@ -38,7 +48,7 @@ export default class Character {
         options.push({
           text: character.name,
           action: () => this.dealDamage({ victim: character, dmg }),
-          deactivated: character.status !== 'playing'
+          deactivated: character.status !== "playing",
         });
       }
     });
