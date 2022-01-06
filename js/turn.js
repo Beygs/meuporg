@@ -49,6 +49,9 @@ export default class Turn {
   }
 
   turnOf(character) {
+    const characterImg = document.querySelector(`.c${character.id} img`);
+    characterImg.classList.add('turn');
+
     display({
       text: `C'est au tour de ${character.name} de jouer !`,
       options: [

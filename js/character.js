@@ -8,6 +8,7 @@ export default class Character {
     this.mana = mana;
     this.turn;
     this.status = "playing";
+    this.id = Date.now() - Math.floor(Math.random() * 1000);
   }
 
   takeDamage(damage) {
@@ -38,6 +39,19 @@ export default class Character {
     victim.takeDamage(dmg);
 
     if (victim.status === "loser") this.mana += 20;
+
+    this.turn.game.hud.showStats();
+
+    const victimImg = document.querySelector(`.c${victim.id} img`);
+    const victimHp = document.querySelector(`.c${victim.id} .hp`);
+
+    victimImg.classList.add('hurt');
+    victimHp.classList.add('hurt');
+
+    setTimeout(() => {
+      victimImg.classList.remove('hurt');
+      victimHp.classList.remove('hurt');
+    }, 2000);
   }
 
   attack({ dmg = this.dmg } = {}) {

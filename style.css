@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Kings&family=MedievalSharp&display=swap');
 *,
 *::before,
 *::after {
@@ -87,7 +86,6 @@ a {
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font-family: 'MedievalSharp', cursive;
   background-color: hsl(34, 78%, 91%);
@@ -102,6 +100,12 @@ body {
 #btns {
   display: grid;
   grid-template-columns: repeat(2, auto);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button {
@@ -120,16 +124,93 @@ button {
 }
 
 .characters-status {
-  position: absolute;
-  top: 0;
-  left: 0;
   padding: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 10rem;
 }
 
 .characters-status div {
   margin: 1rem;
+  font-family: 'Kings', cursive;
+  font-size: 1.3rem;
 }
 
 .dead {
-  color: red;
+  color: hsl(4, 79%, 63%);
+  opacity: .5;
+}
+
+.name {
+  font-size: 1.3em;
+}
+
+.characters-status .class {
+  color: hsl(34, 71%, 40%);
+}
+
+.dead img {
+  filter: sepia() saturate(10000%) hue-rotate(4deg) brightness(50%);
+}
+
+.character img {
+  transform: scale(100%) rotate(0);
+}
+
+.turn {
+  transform: scale(110%);
+  animation: tilt .3s ease 5 alternate forwards, tilt 1s 1.5s alternate-reverse infinite forwards;
+}
+
+img.hurt {
+  animation: hurtAnim .2s ease-out;
+}
+
+.hp {
+  transition: all ease .5s;
+}
+
+.hp.hurt span {
+  animation: blinkHurt .3s ease 6 alternate;
+}
+
+@keyframes tilt {
+  0% {
+    transform: scale(110%) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(120%) rotate(-10deg);
+  }
+}
+
+@keyframes hurtAnim {
+  0% {
+    transform: translateX(0);
+    filter: saturate(100%) hue-rotate(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(10%);
+    filter: sepia() saturate(10000%) hue-rotate(4deg);
+    opacity: .5;
+  }
+
+  100% {
+    transform: translateX(0);
+    filter: saturate(100%) hue-rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes blinkHurt {
+  0% {
+    color: black;
+  }
+
+  100% {
+    color: red;
+  }
 }

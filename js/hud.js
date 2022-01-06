@@ -10,7 +10,9 @@ export default class Hud {
       this.charactersStatusEl.removeChild(this.charactersStatusEl.firstChild);
 
     this.characters.forEach((character) => {
+      const char = document.createElement('div');
       const characterStats = document.createElement("div");
+      const img = document.createElement('img');
       const name = document.createElement("p");
       const charClass = document.createElement("p");
       const hp = document.createElement("p");
@@ -18,10 +20,18 @@ export default class Hud {
       const mana = document.createElement("p");
 
       name.innerText = character.name;
+      img.src = `https://avatars.dicebear.com/api/adventurer/${character.id}.svg`;
       charClass.innerText = character.constructor.name;
-      hp.innerText = `Points de vie : ${character.hp}`;
-      dmg.innerText = `Points de dégats : ${character.dmg}`;
-      mana.innerText = `Points de mana : ${character.mana}`;
+      hp.innerHTML = `Points de vie : <span>${character.hp}</span>`;
+      dmg.innerHTML = `Points de dégats : <span>${character.dmg}</span>`;
+      mana.innerHTML = `Points de mana : <span>${character.mana}</span>`;
+
+      char.classList = `character c${character.id}`;
+      name.classList.add('name');
+      charClass.classList.add('class');
+      hp.classList.add('hp');
+      dmg.classList.add('dmg');
+      mana.classList.add('mana');
 
       characterStats.appendChild(name);
       characterStats.appendChild(charClass);
@@ -29,9 +39,12 @@ export default class Hud {
       characterStats.appendChild(dmg);
       characterStats.appendChild(mana);
 
-      if (character.hp <= 0) characterStats.classList.add("dead");
+      if (character.hp <= 0) char.classList.add("dead");
 
-      this.charactersStatusEl.appendChild(characterStats);
+      char.appendChild(img);
+      char.appendChild(characterStats);
+
+      this.charactersStatusEl.appendChild(char);
     });
   }
 }
