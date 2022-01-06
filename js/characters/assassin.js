@@ -1,12 +1,12 @@
 import Character from "../character.js";
 
 export default class Assassin extends Character {
-  constructor({ name, hp = 6, dmg = 6, mana = 20 } = {}) {
-    super({ name, hp, dmg, mana });
+  constructor({ name, hp = 6, dmg = 6, mana = 20, game } = {}) {
+    super({ name, hp, dmg, mana, game });
     this.special = false;
   }
 
-  special_attack() {
+  specialAttack() {
     console.group(`${this.name} lance son attaque spéciale : %cShadow Hit`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
 
     this.special = true;
@@ -22,6 +22,6 @@ export default class Assassin extends Character {
       return;
     }
 
-    super.dealDamage(damage);
+    super.takeDamage(damage);
   }
 }

@@ -1,11 +1,11 @@
 import Character from "../character.js";
 
 export default class Monk extends Character {
-  constructor({ name, hp = 8, dmg = 2, mana = 200 } = {}) {
-    super({ name, hp, dmg, mana });
+  constructor({ name, hp = 8, dmg = 2, mana = 200, game } = {}) {
+    super({ name, hp, dmg, mana, game });
   }
 
-  special_attack() {
+  specialAttack() {
     console.group(`${this.name} lance son attaque spéciale : %cHeal`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
 
     this.hp += 8;

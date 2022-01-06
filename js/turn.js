@@ -1,13 +1,32 @@
+import { display } from "./utils.js";
+
 export default class Turn {
   constructor({ turnNumber, characters }) {
     this.turnNumber = turnNumber;
     this.characters = characters;
-    this.startTurn();
+    this.turnOfId = 0;
+    characters.forEach(c => {
+      if (c.special) c.special = false;
+      c.turn = this;
+    });
+    display({
+      text: `C'est parti pour le tour ${this.turnNumber} !`,
+      options: [
+        {
+          text: "Continuer",
+          action: this.startTurn.bind(this),
+        },
+      ],
+    });
   }
 
   startTurn() {
-    console.group(`C'est parti pour le tour ${this.turnNumber} !`);
-    this.shuffleCharacters().forEach(character => this.turnOf(character));
+    this.turnOf(this.shuffleCharacters()[this.turnOfId]); //.forEach((character) => this.turnOf(character));
+  }
+
+  nextTurn() {
+    this.turnOfId += 1;
+    this.turnOf(this.turnOfId);
   }
 
   shuffleCharacters() {
@@ -15,6 +34,31 @@ export default class Turn {
   }
 
   turnOf(character) {
-    console.log(`C'est au tour de ${character.name} de jouer !`);
+    display({
+      text: `C'est au tour de ${character.name} de jouer !`,
+      options: [
+        {
+          text: "Attaquer",
+          action: character.attack.bind(character),
+        },
+        {
+          text: character.specialAttack.name,
+          action: character.specialAttack.bind(character),
+        },
+      ],
+    });
+  }
+
+  attack({ character, victim }) {
+    character.dealDamage({ victim });
+
+    this.turnOfId += 1;
+
+    display({
+      text: "Cliquez pour continuer",
+      options: [
+        { text: "Continuer", action: this.turnOf(characters[this.turnOfId]) },
+      ],
+    });
   }
 }
