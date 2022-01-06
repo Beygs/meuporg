@@ -2,8 +2,8 @@ import Character from "../character.js";
 import { display } from "../utils.js";
 
 export default class Paladin extends Character {
-  constructor({ name, hp = 16, dmg = 3, mana = 160, game } = {}) {
-    super({ name, hp, dmg, mana, game });
+  constructor({ name, hp = 16, dmg = 3, mana = 160 } = {}) {
+    super({ name, hp, dmg, mana });
     this.specialAttack = {
       name: "Healing Light",
       action: this.specialAttackAction,

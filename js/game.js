@@ -3,6 +3,7 @@ import Berzerker from "./characters/berzerker.js";
 import Fighter from "./characters/fighter.js";
 import Monk from "./characters/monk.js";
 import Paladin from "./characters/paladin.js";
+import Wizard from "./characters/wizard.js";
 import Hud from "./hud.js";
 import Turn from "./turn.js";
 import { display, speech } from "./utils.js";
@@ -15,13 +16,6 @@ export default class Game {
     this.turnLeft = turnLeft;
     this.totalTurns = turnLeft;
     this.characters = this.selectCharacters();
-    // this.characters = [
-    //   new Fighter({ name: "Grace" }),
-    //   new Paladin({ name: "Ulder" }),
-    //   new Monk({ name: "Moana" }),
-    //   new Berzerker({ name: "Draven" }),
-    //   new Assassin({ name: "Carl" }),
-    // ];
     this.hud = new Hud(this.characters);
 
     display({
@@ -34,11 +28,12 @@ export default class Game {
     const characters = [];
 
     const classes = [
-      (name) => new Fighter({ name }),
-      (name) => new Paladin({ name }),
-      (name) => new Monk({ name }),
-      (name) => new Berzerker({ name }),
-      (name) => new Assassin({ name }),
+      name => new Fighter({ name }),
+      name => new Paladin({ name }),
+      name => new Monk({ name }),
+      name => new Berzerker({ name }),
+      name => new Assassin({ name }),
+      name => new Wizard({ name }),
     ];
 
     const names = [
@@ -65,6 +60,15 @@ export default class Game {
       "Kim",
       "Laurent",
       "Jacqueline",
+      "Guillaume",
+      "Harry",
+      "Anthony",
+      "Violette",
+      "Mathias",
+      "Anaïs",
+      "Gérard Depardieu",
+      "Evan",
+      "Mariem",
     ];
 
     for (let i = 0; i < 5; i++) {
@@ -87,10 +91,7 @@ export default class Game {
         game: this,
       });
     }
-    return display({
-      text: "C'est fini !",
-      options: [{ text: "Rejouer", action: () => new Game() }],
-    });
+    return this.endGame();
   }
 
   checkForWin() {
