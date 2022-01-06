@@ -9,11 +9,13 @@ export const display = ({ text, options }) => {
   }
 
   options.forEach(option => {
-    const btn = document.createElement('button');
-    btn.innerText = option.text;
-    btn.addEventListener('click', () => option.action());
-    btnsEl.appendChild(btn);
+    if (showOption(option)) {
+      const btn = document.createElement('button');
+      btn.innerText = option.text;
+      btn.addEventListener('click', () => option.action());
+      btnsEl.appendChild(btn);
+    }
   });
 }
 
-const showOption = option => true;
+const showOption = option => option.display === undefined || option.display;

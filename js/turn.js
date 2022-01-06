@@ -46,7 +46,7 @@ export default class Turn {
         },
         {
           text: character.specialAttack.name,
-          action: character.specialAttack.action.bind(character),
+          action: character.specialAttack.action.bind(character)
         },
       ],
     });
