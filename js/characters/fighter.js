@@ -6,13 +6,15 @@ export default class Fighter extends Character {
     this.special = false;
     this.specialAttack = {
       name: 'Dark Vision',
-      action: this.specialAttackAction
+      action: this.specialAttackAction,
+      cost: 20
     }
   }
 
   specialAttackAction() {
     console.group(`${this.name} lance son attaque spéciale : %cDark Vision`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
 
+    this.mana -= this.specialAttack.cost;
     this.attack();
     this.special = true;
 

@@ -45,4 +45,8 @@ export default class Character {
 
     return display({ text: "Qui voulez-vous tabasser ?", options });
   }
+
+  activateSpecial = () => {
+    return this.mana < this.specialAttack.cost;
+  };
 }

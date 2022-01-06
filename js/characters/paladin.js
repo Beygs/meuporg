@@ -5,13 +5,15 @@ export default class Paladin extends Character {
     super({ name, hp, dmg, mana, game });
     this.specialAttack = {
       name: 'Healing Light',
-      action: this.specialAttackAction
+      action: this.specialAttackAction,
+      cost: 40
     }
   }
 
   specialAttackAction() {
     console.group(`${this.name} lance son attaque spéciale : %cHealing Light`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
 
+    this.mana -= this.specialAttack.cost
     this.attack({ dmg: 4 });
     this.hp += 5;
 

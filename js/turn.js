@@ -1,3 +1,4 @@
+import Game from "./game.js";
 import { display } from "./utils.js";
 
 export default class Turn {
@@ -22,16 +23,19 @@ export default class Turn {
   }
 
   startTurn() {
-    this.turnOf(this.shuffleCharacters()[this.turnOfId]);
+    this.shuffleCharacters();
+    this.nextTurn();
   }
 
   nextTurn() {
+    if (this.game.checkForWin()) return this.game.endGame();
+
     this.game.hud.showStats();
 
-    if (this.turnOfId === this.characters.length - 1) return this.game.newTurn();
+    if (this.turnOfId === this.characters.length) return this.game.newTurn();
 
-    this.turnOfId += 1;
     const character = this.characters[this.turnOfId];
+    this.turnOfId += 1;
 
     if (character.status === 'playing') {
       this.turnOf(character);
@@ -54,7 +58,8 @@ export default class Turn {
         },
         {
           text: character.specialAttack.name,
-          action: character.specialAttack.action.bind(character)
+          action: character.specialAttack.action.bind(character),
+          deactivated: character.activateSpecial()
         },
       ],
     });
@@ -71,5 +76,17 @@ export default class Turn {
         { text: "Continuer", action: this.turnOf(characters[this.turnOfId]) },
       ],
     });
+  }
+
+  endGame() {
+    display({
+      text: `Fin du jeu ! Le ou les gagnants sont : ${this.characters.filter(c => c.status === 'playing').map(c => c.name).join(', ')} !`,
+      options: [{
+        options: {
+          text: 'Rejouer',
+          action: () => new Game({ turnLeft: 10 })
+        }
+      }]
+    })
   }
 }

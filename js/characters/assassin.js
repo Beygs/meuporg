@@ -6,13 +6,15 @@ export default class Assassin extends Character {
     this.special = false;
     this.specialAttack = {
       name: 'Shadow Hit',
-      action: this.specialAttackAction
+      action: this.specialAttackAction,
+      cost: 20
     }
   }
 
   specialAttackAction() {
     console.group(`${this.name} lance son attaque spéciale : %cShadow Hit`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
 
+    this.mana -= this.specialAttack.cost;
     this.special = true;
 
     console.log(`Les attaques dirigées vers ${this.name} ne pourront plus lui infliger de dommages jusqu'au prochain tour`);

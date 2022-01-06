@@ -39,7 +39,21 @@ export default class Game {
     }
     return display({
       text: "C'est fini !",
-      options: [{ text: "Rejouer", action: () => new Game({ turnLeft: 10 }) }],
+      options: [{ text: "Rejouer", action: () => new Game() }],
     });
+  }
+
+  checkForWin() {
+    return this.characters.filter(c => c.status === 'playing').length <= 1;
+  }
+
+  endGame() {
+    display({
+      text: `Fin du jeu ! Le ou les gagnants sont : ${this.characters.filter(c => c.status === 'playing').map(c => c.name).join(', ')} !`,
+      options: [{
+        text: 'Rejouer',
+        action: () => new Game()
+      }]
+    })
   }
 }
