@@ -1,11 +1,15 @@
 import Character from "../character.js";
 
 export default class Monk extends Character {
-  constructor({ name, hp = 8, dmg = 2, mana = 200, game } = {}) {
-    super({ name, hp, dmg, mana, game });
+  constructor({ name, hp = 8, dmg = 2, mana = 200 } = {}) {
+    super({ name, hp, dmg, mana });
+    this.specialAttack = {
+      name: 'Heal',
+      action: this.specialAttackAction
+    }
   }
 
-  specialAttack() {
+  specialAttackAction() {
     console.group(`${this.name} lance son attaque spéciale : %cHeal`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
 
     this.hp += 8;
@@ -13,5 +17,7 @@ export default class Monk extends Character {
     console.log(`${this.name} se soigne de 8 points de vie. Il a désormais ${this.hp} points de vie`);
 
     console.groupEnd();
+
+    this.turn.nextTurn();
   }
 }

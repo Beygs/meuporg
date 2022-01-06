@@ -34,9 +34,7 @@ export default class Character {
       if (character !== this) {
         options.push({
           text: character.name,
-          action: function () {
-            this.dealDamage({ victim: character, dmg });
-          }.bind(this),
+          action: () => this.dealDamage({ victim: character, dmg }),
         });
       }
     });

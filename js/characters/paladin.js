@@ -3,9 +3,13 @@ import Character from "../character.js";
 export default class Paladin extends Character {
   constructor({ name, hp = 16, dmg = 3, mana = 160, game } = {}) {
     super({ name, hp, dmg, mana, game });
+    this.specialAttack = {
+      name: 'Healing Light',
+      action: this.specialAttackAction
+    }
   }
 
-  specialAttack() {
+  specialAttackAction() {
     console.group(`${this.name} lance son attaque spéciale : %cHealing Light`, `color: hsl(${Math.floor(Math.random() * 360)}, 50%, 50%);`);
 
     this.attack({ dmg: 4 });
