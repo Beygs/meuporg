@@ -14,19 +14,68 @@ export default class Game {
   constructor({ turnLeft = 10 } = {}) {
     this.turnLeft = turnLeft;
     this.totalTurns = turnLeft;
-    this.characters = [
-      new Fighter({ name: "Grace" }),
-      new Paladin({ name: "Ulder" }),
-      new Monk({ name: "Moana" }),
-      new Berzerker({ name: "Draven" }),
-      new Assassin({ name: "Carl" }),
-    ];
+    this.characters = this.selectCharacters();
+    // this.characters = [
+    //   new Fighter({ name: "Grace" }),
+    //   new Paladin({ name: "Ulder" }),
+    //   new Monk({ name: "Moana" }),
+    //   new Berzerker({ name: "Draven" }),
+    //   new Assassin({ name: "Carl" }),
+    // ];
     this.hud = new Hud(this.characters);
 
     display({
       text: "Bienvenue dans le MEUPORG ",
       options: [{ text: "Continuer", action: this.newTurn.bind(this) }],
     });
+  }
+
+  selectCharacters() {
+    const characters = [];
+
+    const classes = [
+      (name) => new Fighter({ name }),
+      (name) => new Paladin({ name }),
+      (name) => new Monk({ name }),
+      (name) => new Berzerker({ name }),
+      (name) => new Assassin({ name }),
+    ];
+
+    const names = [
+      "Grace",
+      "Ulder",
+      "Moana",
+      "Draven",
+      "Carl",
+      "Jacques",
+      "Eric",
+      "René",
+      "Micheline",
+      "Jean",
+      "Henri",
+      "Pierre",
+      "Lilian",
+      "Féfé",
+      "Cédric",
+      "Juan",
+      "Jérémie",
+      "Julien",
+      "Lucas",
+      "Lionel",
+      "Kim",
+      "Laurent",
+      "Jacqueline",
+    ];
+
+    for (let i = 0; i < 5; i++) {
+      characters.push(
+        classes[Math.floor(Math.random() * classes.length)](
+          names[Math.floor(Math.random() * names.length)]
+        )
+      );
+    }
+
+    return characters;
   }
 
   newTurn() {
