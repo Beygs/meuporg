@@ -71,6 +71,8 @@ export default class Game {
       "Gérard Depardieu",
       "Evan",
       "Mariem",
+      "Quentin",
+      "Nicolas",
     ];
 
     for (let i = 0; i < 5; i++) {
