@@ -9,9 +9,6 @@ import Hud from "./hud.js";
 import Turn from "./turn.js";
 import { display, speech } from "./utils.js";
 
-const text = document.getElementById("text");
-const btns = document.getElementById("btns");
-
 export default class Game {
   constructor({ turnLeft = 10 } = {}) {
     this.turnLeft = turnLeft;
@@ -51,7 +48,7 @@ export default class Game {
       "Jean",
       "Henri",
       "Pierre",
-      "Lilian",
+      "Lilian du staff",
       "Féfé",
       "Cédric",
       "Juan",
@@ -73,6 +70,13 @@ export default class Game {
       "Mariem",
       "Quentin",
       "Nicolas",
+      "Guillaume",
+      "Bastien",
+      "Paul",
+      "Josselin",
+      "Guillaume",
+      "Zaratan",
+      "Super-Gibbz",
     ];
 
     for (let i = 0; i < 5; i++) {

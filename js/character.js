@@ -45,7 +45,10 @@ export default class Character {
         "ça fait mal",
         "Ouille",
         "Je vais me plaindre à Féfé",
-        "ça c'est pas très gentil"
+        "ça c'est pas très gentil",
+        "T'es ban",
+        "Josselin au secours",
+        "Paul vient m'aider s'il-te-plaît"
       ];
 
       speech(sentences);

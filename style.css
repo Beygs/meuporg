@@ -151,7 +151,7 @@ button:hover .hover-text {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  margin-bottom: 10rem;
+  margin-bottom: 4rem;
 }
 
 .characters-status div {
